@@ -1,0 +1,2093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ObituaryMatch | Love Never Dies... But You Do!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Eater&family=Creepster&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <style>
+        /* === GLOBAL STYLES === */
+        :root {
+            --blood-red: #8b0000;
+            --dark-blood: #5a0000;
+            --ghost-white: #f8f8ff;
+            --tombstone-gray: #2b2b2b;
+            --dark-tombstone: #1a1a1a;
+            --ectoplasm-green: #7cfc00;
+            --dark-ectoplasm: #5ac000;
+            --spooky-purple: #9400d3;
+            --coffin-brown: #654321;
+            --cobweb-gray: #e0e0e0;
+            --gothic-gold: #d4af37;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--ghost-white);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'IM Fell English SC', serif;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(43, 43, 43, 0.8) 100%);
+            z-index: -1;
+        }
+        
+        /* === SYMMETRICAL LAYOUT === */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 2rem;
+        }
+        
+        .symmetrical-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            font-family: 'Eater', cursive;
+            letter-spacing: 2px;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 4px;
+            background: var(--blood-red);
+            border-radius: 2px;
+        }
+        
+        /* === GOTHIC ELEMENTS === */
+        .gothic-border {
+            position: relative;
+            padding: 2rem;
+            border: 2px solid var(--gothic-gold);
+            border-image: linear-gradient(45deg, var(--gothic-gold), var(--blood-red)) 1;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.3);
+        }
+        
+        .gothic-border::before, .gothic-border::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border: 2px solid var(--gothic-gold);
+        }
+        
+        .gothic-border::before {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+        
+        .gothic-border::after {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+        
+        .gothic-pattern {
+            background-image: 
+                linear-gradient(90deg, rgba(212, 175, 55, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(212, 175, 55, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
+        /* === HEADER STYLES === */
+        header {
+            background: linear-gradient(to right, var(--tombstone-gray), var(--dark-tombstone));
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            position: relative;
+            z-index: 100;
+            border-bottom: 1px solid var(--blood-red);
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .logo h1 {
+            font-size: 2.2rem;
+            text-shadow: 0 0 10px var(--ectoplasm-green);
+            animation: glow 2s infinite alternate;
+            font-family: 'Eater', cursive;
+            letter-spacing: 1px;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--ectoplasm-green); }
+            to { text-shadow: 0 0 15px var(--ectoplasm-green), 0 0 20px var(--spooky-purple); }
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--ghost-white);
+            text-decoration: none;
+            font-size: 1.2rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ectoplasm-green);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.5rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary {
+            background: var(--blood-red);
+            color: white;
+            box-shadow: 0 4px 0 var(--dark-blood);
+        }
+        
+        .btn-primary:hover {
+            background: #a00000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 var(--dark-blood);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 var(--dark-blood);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--ghost-white);
+            border: 1px solid var(--ghost-white);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--ectoplasm-green);
+            border-color: var(--ectoplasm-green);
+        }
+        
+        /* === HERO SECTION === */
+        .hero {
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1518709766630-a6a7f45921c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center;
+            background-size: cover;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(139, 0, 0, 0.5) 100%);
+        }
+        
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            padding: 3rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--gothic-gold);
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+        }
+        
+        .hero h2 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 10px var(--blood-red);
+            font-family: 'Eater', cursive;
+            line-height: 1.2;
+            letter-spacing: 2px;
+            animation: float 6s ease-in-out infinite;
+            color: var(--gothic-gold);
+        }
+        
+        .hero p {
+            font-size: 1.6rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+        
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn-lg {
+            padding: 1rem 2.5rem;
+            font-size: 1.3rem;
+            min-width: 200px;
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--ectoplasm-green);
+            border: 2px solid var(--ectoplasm-green);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-ghost::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(124, 252, 0, 0.4), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn-ghost:hover::before {
+            left: 100%;
+        }
+        
+        /* === FEATURES SECTION === */
+        .features {
+            padding: 6rem 2rem;
+            background: rgba(43, 43, 43, 0.8);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid var(--blood-red);
+            border-radius: 15px;
+            padding: 2.5rem 2rem;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(139, 0, 0, 0.4);
+            border-color: var(--ectoplasm-green);
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--blood-red);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover::before {
+            background: var(--ectoplasm-green);
+            height: 8px;
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ectoplasm-green);
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(15deg) scale(1.2);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.7rem;
+            margin-bottom: 1.2rem;
+            color: var(--ghost-white);
+            font-family: 'Creepster', cursive;
+            letter-spacing: 1px;
+        }
+        
+        .feature-card p {
+            color: var(--cobweb-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* === TESTIMONIALS === */
+        .testimonials {
+            padding: 6rem 2rem;
+            background: url('https://images.unsplash.com/photo-1506815444479-bfdb1e96c566?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .testimonials::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(139, 0, 0, 0.7) 100%);
+        }
+        
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .testimonial-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 2rem;
+            padding: 3rem 0;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .testimonial-slider::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .testimonial {
+            min-width: 100%;
+            scroll-snap-align: start;
+            background: rgba(43, 43, 43, 0.9);
+            padding: 3rem;
+            border-radius: 15px;
+            border-left: 8px solid var(--blood-red);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s;
+        }
+        
+        .testimonial:hover {
+            border-left-color: var(--ectoplasm-green);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-content {
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.7;
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            left: 0;
+            top: -1rem;
+            font-size: 4rem;
+            color: var(--blood-red);
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        
+        .author-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--ectoplasm-green);
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.5);
+        }
+        
+        .author-info h4 {
+            font-size: 1.4rem;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 1px;
+            color: var(--ghost-white);
+        }
+        
+        .author-info p {
+            color: #aaa;
+            font-size: 1rem;
+            font-style: italic;
+        }
+        
+        /* Slider Navigation */
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--tombstone-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 1px solid var(--ghost-white);
+        }
+        
+        .slider-dot.active {
+            background: var(--ectoplasm-green);
+            transform: scale(1.2);
+        }
+        
+        /* === PREMIUM SECTION === */
+        .premium {
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, var(--tombstone-gray), #000);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .pricing-cards {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+        
+        .pricing-card {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid var(--spooky-purple);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            width: 350px;
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .pricing-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(148, 0, 211, 0.5);
+        }
+        
+        .pricing-card.popular {
+            border-color: var(--ectoplasm-green);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card.popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--ectoplasm-green);
+            color: black;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-bottom-left-radius: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Creepster', cursive;
+        }
+        
+        .pricing-card h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--spooky-purple);
+            font-family: 'Eater', cursive;
+            letter-spacing: 1px;
+        }
+        
+        .pricing-card.popular h3 {
+            color: var(--ectoplasm-green);
+        }
+        
+        .price {
+            font-size: 3.5rem;
+            margin-bottom: 2rem;
+            font-family: 'Creepster', cursive;
+            color: var(--ghost-white);
+        }
+        
+        .price span {
+            font-size: 1.2rem;
+            color: #aaa;
+            font-family: 'IM Fell English SC', serif;
+        }
+        
+        .features-list {
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+        
+        .features-list li {
+            margin-bottom: 1rem;
+            list-style-type: none;
+            position: relative;
+            padding-left: 2rem;
+            line-height: 1.6;
+            color: var(--cobweb-gray);
+        }
+        
+        .features-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--ectoplasm-green);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .pricing-card .btn {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            margin-top: auto;
+        }
+        
+        /* === STATS SECTION === */
+        .stats {
+            padding: 6rem 2rem;
+            background: url('https://images.unsplash.com/photo-1518709766630-a6a7f45921c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+        
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+        
+        .stat-item {
+            background: rgba(43, 43, 43, 0.8);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--blood-red);
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-10px);
+            border-color: var(--ectoplasm-green);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-family: 'Eater', cursive;
+            color: var(--ectoplasm-green);
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 1.2rem;
+            color: var(--ghost-white);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* === FAQ SECTION === */
+        .faq {
+            padding: 6rem 2rem;
+            background: var(--tombstone-gray);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .faq-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .accordion {
+            margin-top: 3rem;
+        }
+        
+        .accordion-item {
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            overflow: hidden;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .accordion-header {
+            padding: 1.5rem;
+            background: rgba(139, 0, 0, 0.2);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        .accordion-header:hover {
+            background: rgba(139, 0, 0, 0.3);
+        }
+        
+        .accordion-header::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .accordion-item.active .accordion-header::after {
+            transform: rotate(45deg);
+        }
+        
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 1.5rem;
+        }
+        
+        .accordion-item.active .accordion-content {
+            max-height: 500px;
+            padding: 1.5rem;
+        }
+        
+        .accordion-content p {
+            line-height: 1.7;
+            color: var(--cobweb-gray);
+        }
+        
+        /* === FOOTER === */
+        footer {
+            background: var(--dark-tombstone);
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid var(--blood-red);
+            margin-top: auto;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            text-align: left;
+        }
+        
+        .footer-column {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--ectoplasm-green);
+            font-family: 'Eater', cursive;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--blood-red);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 1.1rem;
+        }
+        
+        .footer-column a:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+        
+        .social-links a:hover {
+            background: var(--blood-red);
+            transform: translateY(-5px) rotate(10deg);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.5);
+        }
+        
+        .newsletter-form {
+            margin-top: 1.5rem;
+            width: 100%;
+        }
+        
+        .newsletter-input {
+            width: 100%;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--blood-red);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--ectoplasm-green);
+        }
+        
+        .copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .copyright .pulse {
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        /* === ANIMATIONS === */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                opacity: 1;
+            }
+            20%, 22%, 24%, 55% {
+                opacity: 0.5;
+            }
+        }
+        
+        .flicker {
+            animation: flicker 3s infinite;
+        }
+        
+        /* === MODAL === */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background: var(--tombstone-gray);
+            border: 2px solid var(--blood-red);
+            border-radius: 15px;
+            max-width: 500px;
+            width: 90%;
+            padding: 3rem 2rem;
+            position: relative;
+            animation: modalFadeIn 0.4s;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+        }
+        
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(-50px) scale(0.9); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.3s;
+            line-height: 1;
+            padding: 0.5rem;
+        }
+        
+        .close-modal:hover {
+            color: var(--blood-red);
+            transform: rotate(90deg);
+        }
+        
+        .modal h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--ectoplasm-green);
+            font-family: 'Eater', cursive;
+            text-align: center;
+        }
+        
+        /* === FORM STYLES === */
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: var(--ectoplasm-green);
+            font-family: 'Creepster', cursive;
+            letter-spacing: 1px;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            color: white;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--ectoplasm-green);
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.3);
+        }
+        
+        .form-submit {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        
+        .form-footer {
+            margin-top: 2rem;
+            text-align: center;
+            color: #aaa;
+        }
+        
+        .form-footer a {
+            color: var(--ectoplasm-green);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .form-footer a:hover {
+            color: var(--ghost-white);
+        }
+        
+        /* Error message styling */
+        .error-message {
+            color: var(--blood-red);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            display: none;
+        }
+        
+        /* Success message styling */
+        .success-message {
+            color: var(--ectoplasm-green);
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.1rem;
+            display: none;
+        }
+        
+        /* === MEDIA QUERIES === */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+            
+            .pricing-cards {
+                gap: 2rem;
+            }
+            
+            .pricing-card {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+            
+            nav ul {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero {
+                padding: 4rem 1.5rem;
+                min-height: auto;
+            }
+            
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.3rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .btn-lg {
+                width: 100%;
+            }
+            
+            .testimonial {
+                padding: 2rem;
+            }
+            
+            .testimonial-content {
+                font-size: 1.1rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .logo h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .feature-card {
+                padding: 2rem 1.5rem;
+            }
+            
+            .testimonial {
+                padding: 1.5rem;
+            }
+            
+            .testimonial-author {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .author-avatar {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .modal-content {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Ghost Elements -->
+    <div class="floating" style="position: fixed; top: 20%; left: 5%; font-size: 3rem; z-index: 1; filter: drop-shadow(0 0 10px var(--ectoplasm-green));">👻</div>
+    <div class="floating" style="position: fixed; top: 70%; right: 10%; font-size: 4rem; z-index: 1; animation-delay: 0.5s; filter: drop-shadow(0 0 10px var(--blood-red));">💀</div>
+    <div class="floating" style="position: fixed; bottom: 10%; left: 15%; font-size: 2.5rem; z-index: 1; animation-delay: 1s; filter: drop-shadow(0 0 10px var(--spooky-purple));">🦴</div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span style="font-size: 2.5rem;">⚰️</span>
+            <h1>ObituaryMatch</h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="ss.html">Eternal Feed</a></li>
+                <li><a href="spirit_matchmaking.html">Spirit Dating</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#premium">Premium</a></li>
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+        
+        <div class="auth-buttons">
+            <button class="btn btn-secondary" id="login-btn">Log In</button>
+            <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Love Never Dies...<br>But You Do!</h2>
+            <p>Join the afterlife's most vibrant social network and dating platform for spirits, ghosts, and skeletons. Find your eternal soulmate in the great beyond!</p>
+            
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-lg" onclick="window.location.href='spirit_matchmaking.html'">Start Haunting Now</button>
+                <button class="btn btn-ghost btn-lg" id="learn-more">Learn More</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Afterlife Features</h2>
+            
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">💑</div>
+                    <h3>Ghost Matching</h3>
+                    <p>Our patented Ecto-Swipe™ technology helps you find compatible spirits based on death era, haunting style, and spectral compatibility.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🔮</div>
+                    <h3>Séance Chat</h3>
+                    <p>Communicate with other spirits through our medium-verified chat system. Includes Ouija board emojis and real-time possession indicators.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🏚️</div>
+                    <h3>Haunt Together</h3>
+                    <p>Find haunted locations near you and team up with other spirits for maximum spookiness. Group hauntings get 20% more screams!</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">📜</div>
+                    <h3>Obituary Stories</h3>
+                    <p>Share your death story and afterlife adventures in our spectral social feed. Get likes, comments, and spectral validation.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="feature-card">
+                    <div class="feature-icon">🎭</div>
+                    <h3>Spirit Masks</h3>
+                    <p>Customize your spectral appearance with our collection of ghostly filters. Look less decomposed and more date-ready!</p>
+                </div>
+                
+                <!-- Feature 6 -->
+                <div class="feature-card">
+                    <div class="feature-icon">⚰️</div>
+                    <h3>Coffin GPS</h3>
+                    <p>Never lose track of your earthly remains again with our Coffin Locator System. Find your body with 99.9% accuracy!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Ghostly Testimonials</h2>
+            
+            <div class="testimonial-slider" id="testimonial-slider">
+                <!-- Testimonial 1 -->
+                <div class="testimonial">
+                    <p class="testimonial-content">I was haunting alone for 150 years before I found ObituaryMatch. Now I'm in a committed relationship with a Victorian-era ghost named Beatrice. We haunt a castle together in Transylvania!</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/JQJQJQJ.jpg" alt="Ghost" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Sir Reginald Von Hauntley</h4>
+                            <p>Died: 1872 (Duel gone wrong)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial">
+                    <p class="testimonial-content">As a modern ghost (died 2020), I was having trouble connecting with older spirits. The 'Death Era Filter' helped me find other recently deceased who understand my TikTok ghosting style.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/YYYYYY.jpg" alt="Ghost" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Emily "Boo" Jackson</h4>
+                            <p>Died: 2020 (Unfortunate toaster incident)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial">
+                    <p class="testimonial-content">The séance chat feature helped me finally communicate with my great-great-grandmother! Turns out she's been haunting our family for generations and had some choice words about my life choices.</p>
+                    <div class="testimonial-author">
+                        <img src="https://i.imgur.com/ZZZZZZ.jpg" alt="Ghost" class="author-avatar">
+                        <div class="author-info">
+                            <h4>Carlos Martinez</h4>
+                            <p>Died: 2018 (Skydiving without a parachute)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-nav">
+                <div class="slider-dot active" data-index="0"></div>
+                <div class="slider-dot" data-index="1"></div>
+                <div class="slider-dot" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Stats Section -->
+    <section class="stats" id="stats">
+        <div class="container">
+            <h2 class="section-title">Afterlife by the Numbers</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">666,666+</div>
+                    <div class="stat-label">Active Spirits</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1,337</div>
+                    <div class="stat-label">Daily Séances</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">13</div>
+                    <div class="stat-label">Centuries Covered</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Premium Section -->
+    <section class="premium" id="premium">
+        <div class="container">
+            <h2 class="section-title">Afterlife Premium</h2>
+            
+            <div class="pricing-cards">
+                <!-- Basic Plan -->
+                <div class="pricing-card">
+                    <h3>Restless Spirit</h3>
+                    <div class="price">$0 <span>/ eternity</span></div>
+                    <ul class="features-list">
+                        <li>Basic haunting profile</li>
+                        <li>5 swipes per day</li>
+                        <li>Limited séance minutes</li>
+                        <li>Ad-supported afterlife</li>
+                        <li>Basic ghost filters</li>
+                        <li>Standard obituary</li>
+                    </ul>
+                    <button class="btn btn-secondary">Choose Plan</button>
+                </div>
+                
+                <!-- Popular Plan -->
+                <div class="pricing-card popular">
+                    <h3>Poltergeist Plus</h3>
+                    <div class="price">$6.66 <span>/ month</span></div>
+                    <ul class="features-list">
+                        <li>Unlimited swipes</li>
+                        <li>Priority haunting placement</li>
+                        <li>Advanced séance features</li>
+                        <li>Ad-free eternity</li>
+                        <li>Premium ghost filters</li>
+                        <li>Cursed likes (hex your ex!)</li>
+                        <li>Enhanced obituary</li>
+                    </ul>
+                    <button class="btn btn-primary">Choose Plan</button>
+                </div>
+                
+                <!-- Premium Plan -->
+                <div class="pricing-card">
+                    <h3>Phantom Elite</h3>
+                    <div class="price">$13.37 <span>/ month</span></div>
+                    <ul class="features-list">
+                        <li>All Poltergeist Plus features</li>
+                        <li>Exclusive haunted locations</li>
+                        <li>Personal medium assistant</li>
+                        <li>Resurrection Roulette™</li>
+                        <li>VIP séance channels</li>
+                        <li>Ghost butler service</li>
+                        <li>Premium obituary with video</li>
+                    </ul>
+                    <button class="btn btn-secondary">Choose Plan</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>How do I know if I'm eligible to join?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>ObituaryMatch is exclusively for deceased individuals. If you're reading this and you're alive, you're not eligible (yet). For spirits, simply provide your death certificate or have a verified medium confirm your status during the signup process.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Can I connect with living relatives?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Yes! Our Medium Connect feature allows you to communicate with living relatives through verified mediums. You can also set up alerts to notify you when living family members join our Living Memorial service.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>What if I don't remember how I died?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Many spirits experience post-mortem amnesia. Our Death Recall Therapy sessions (available with Poltergeist Plus and above) can help you recover those memories. Or you can just make up something cool - we won't judge!</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>Is there an age restriction?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>You must be at least 18 years old at time of death to create a dating profile. However, spirits of all ages can use our Family Connections features to find deceased relatives.</p>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <span>How do I cancel my premium membership?</span>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Simply have a living relative visit your grave at midnight during a full moon and recite the cancellation incantation provided in your account settings. Alternatively, you can possess a customer service representative - we're legally required to honor cancellation requests made via possession.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>ObituaryMatch</h3>
+                    <p>The premier dating and social network for the deceased. Established 1666.</p>
+                    <div class="social-links">
+                        <a href="#" title="Facebook">👻</a>
+                        <a href="#" title="Twitter">💀</a>
+                        <a href="#" title="Instagram">🦴</a>
+                        <a href="#" title="TikTok">⚰️</a>
+                        <a href="#" title="YouTube">🧟</a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Ghost Stories</a></li>
+                        <li><a href="#">Haunting Tips</a></li>
+                        <li><a href="#">Medium Directory</a></li>
+                        <li><a href="#">Afterlife FAQ</a></li>
+                        <li><a href="#">Spectral Events</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Terms of Death</a></li>
+                        <li><a href="#">Privacy Poltergeist</a></li>
+                        <li><a href="#">Cookie Ghosting</a></li>
+                        <li><a href="#">DMCA (Dead Media Copyright Act)</a></li>
+                        <li><a href="#">Afterlife Arbitration</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>📧 support@obituarymatch.com</li>
+                        <li>🔮 Séance Line: 1-800-GHOSTLY</li>
+                        <li>🏚️ Haunted HQ: 1313 Cemetery Lane</li>
+                    </ul>
+                    
+                    <div class="newsletter-form">
+                        <h4>Ecto-Newsletter</h4>
+                        <input type="email" class="newsletter-input" placeholder="Your ghostly email">
+                        <button class="btn btn-primary" style="width: 100%;">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>© 2023 ObituaryMatch. All rights reserved. "Love Never Dies... But You Do!" is a registered trademark.</p>
+                <p class="pulse">👻 This website is actually haunted. 👻</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Log In to Your Afterlife</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Spirit Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="yourname@afterlife.com" required>
+                    <div class="error-message" id="login-email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Séance Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required>
+                    <div class="error-message" id="login-password-error"></div>
+                </div>
+                <div class="success-message" id="login-success"></div>
+                <button type="submit" class="btn btn-primary form-submit">Cross Over</button>
+                <div class="form-footer">
+                    Don't have an account? <a href="#" id="switch-to-signup">Join the afterlife</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Join the Afterlife</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Spirit Name</label>
+                    <input type="text" id="signup-name" class="form-control" placeholder="How you want to be addressed" required>
+                    <div class="error-message" id="signup-name-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Spirit Email</label>
+                    <input type="email" id="signup-email" class="form-control" placeholder="yourname@afterlife.com" required>
+                    <div class="error-message" id="signup-email-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Create Séance Password</label>
+                    <input type="password" id="signup-password" class="form-control" placeholder="••••••••" required>
+                    <div class="error-message" id="signup-password-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="death-year">Year of Death</label>
+                    <input type="number" id="death-year" class="form-control" placeholder="e.g., 1999" min="0" max="2023" required>
+                    <div class="error-message" id="death-year-error"></div>
+                </div>
+                <div class="form-group">
+                    <label for="death-cause">Cause of Death</label>
+                    <select id="death-cause" class="form-control" required>
+                        <option value="">Select your demise...</option>
+                        <option value="natural">Natural Causes</option>
+                        <option value="accident">Freak Accident</option>
+                        <option value="murder">Murder Most Foul</option>
+                        <option value="plague">Plague/Disease</option>
+                        <option value="war">War/Battle</option>
+                        <option value="mystery">Mysterious Circumstances</option>
+                        <option value="other">Other (Please Specify)</option>
+                    </select>
+                    <div class="error-message" id="death-cause-error"></div>
+                </div>
+                <div class="form-group" id="other-cause-group" style="display: none;">
+                    <label for="other-cause">Describe Your Demise</label>
+                    <input type="text" id="other-cause" class="form-control" placeholder="e.g., 'Killed by a falling piano'">
+                    <div class="error-message" id="other-cause-error"></div>
+                </div>
+                <div class="success-message" id="signup-success"></div>
+                <button type="submit" class="btn btn-primary form-submit">Begin Your Afterlife</button>
+                <div class="form-footer">
+                    Already a spirit? <a href="#" id="switch-to-login">Log in here</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // === MODAL FUNCTIONALITY ===
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeButtons = document.querySelectorAll('.close-modal');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const switchToLogin = document.getElementById('switch-to-login');
+        
+        // Open modals
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            clearErrors('login');
+        });
+        
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+            clearErrors('signup');
+        });
+        
+        // Switch between modals
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+            clearErrors('login');
+            clearErrors('signup');
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+            clearErrors('login');
+            clearErrors('signup');
+        });
+        
+        // Close modals
+        closeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                clearErrors('login');
+                clearErrors('signup');
+            });
+        });
+        
+        // Close when clicking outside modal
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                clearErrors('login');
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                clearErrors('signup');
+            }
+        });
+        
+        // === FORM VALIDATION HELPERS ===
+        function showError(field, message) {
+            const errorElement = document.getElementById(`${field}-error`);
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+        }
+        
+        function clearErrors(formType) {
+            const errorElements = document.querySelectorAll(`#${formType}-form .error-message`);
+            errorElements.forEach(el => {
+                el.textContent = '';
+                el.style.display = 'none';
+            });
+            
+            // Also clear success messages
+            const successElement = document.getElementById(`${formType}-success`);
+            if (successElement) {
+                successElement.textContent = '';
+                successElement.style.display = 'none';
+            }
+        }
+        
+        function showSuccess(formType, message) {
+            const successElement = document.getElementById(`${formType}-success`);
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+        }
+        
+        // === FORM HANDLING ===
+        document.getElementById('death-cause').addEventListener('change', function() {
+            const otherCauseGroup = document.getElementById('other-cause-group');
+            otherCauseGroup.style.display = this.value === 'other' ? 'block' : 'none';
+            if (this.value === 'other') {
+                document.getElementById('other-cause').focus();
+            }
+        });
+        
+        // Login form handling
+        document.getElementById('login-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearErrors('login');
+            
+            // Get form values
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            
+            // Validate inputs
+            let isValid = true;
+            
+            if (!email) {
+                showError('login-email', 'Spirit email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('login-email', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showError('login-password', 'Password is required');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('login-password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Contacting the other side...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Simulate API call with timeout
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // In a real app, you would send this to your backend
+                // const response = await authenticateSpirit({ email, password });
+                
+                // For demo purposes, we'll just check for specific values
+                if (email === 'ghost@example.com' && password === 'password') {
+                    showSuccess('login', 'Success! Welcome back to the afterlife.');
+                    
+                    // Redirect after delay
+                    setTimeout(() => {
+                        loginModal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                        
+                        // Update UI to show logged in state
+                        document.getElementById('login-btn').textContent = 'My Profile';
+                        document.getElementById('signup-btn').style.display = 'none';
+                        
+                        // Reset form
+                        this.reset();
+                    }, 1500);
+                } else {
+                    showError('login-password', 'Invalid email or password');
+                }
+            } catch (error) {
+                showError('login-password', 'An error occurred. Please try again.');
+                console.error('Login error:', error);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // Signup form handling
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Clear previous errors
+            clearErrors('signup');
+            
+            // Get form values
+            const name = document.getElementById('signup-name').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
+            const password = document.getElementById('signup-password').value.trim();
+            const deathYear = parseInt(document.getElementById('death-year').value);
+            const deathCause = document.getElementById('death-cause').value;
+            const otherCause = document.getElementById('other-cause').value.trim();
+            
+            // Validate inputs
+            let isValid = true;
+            const currentYear = new Date().getFullYear();
+            
+            if (!name) {
+                showError('signup-name', 'Spirit name is required');
+                isValid = false;
+            }
+            
+            if (!email) {
+                showError('signup-email', 'Spirit email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showError('signup-email', 'Please enter a valid email address');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showError('signup-password', 'Password is required');
+                isValid = false;
+            } else if (password.length < 6) {
+                showError('signup-password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+            
+            if (!deathYear) {
+                showError('death-year', 'Year of death is required');
+                isValid = false;
+            } else if (deathYear > currentYear) {
+                showError('death-year', 'You can\'t die in the future!');
+                isValid = false;
+            } else if (deathYear < 0) {
+                showError('death-year', 'Please enter a valid year');
+                isValid = false;
+            }
+            
+            if (!deathCause) {
+                showError('death-cause', 'Cause of death is required');
+                isValid = false;
+            } else if (deathCause === 'other' && !otherCause) {
+                showError('other-cause', 'Please describe your demise');
+                isValid = false;
+            }
+            
+            if (!isValid) return;
+            
+            // Show loading state
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing your spirit...';
+            submitBtn.disabled = true;
+            
+            try {
+                // Simulate API call with timeout
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // In a real app, you would send this to your backend
+                // const response = await registerSpirit({ name, email, password, deathYear, deathCause, otherCause });
+                
+                // For demo purposes, we'll just show success
+                showSuccess('signup', 'Welcome to the afterlife! Your spirit profile has been created.');
+                
+                // Reset form after delay
+                setTimeout(() => {
+                    signupModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Update UI to show logged in state
+                    document.getElementById('login-btn').textContent = 'My Profile';
+                    document.getElementById('signup-btn').style.display = 'none';
+                    
+                    // Reset form
+                    this.reset();
+                    document.getElementById('other-cause-group').style.display = 'none';
+                }, 2000);
+            } catch (error) {
+                showError('signup-email', 'An error occurred. Please try again.');
+                console.error('Signup error:', error);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+        
+        // === TESTIMONIAL SLIDER ===
+        let currentTestimonial = 0;
+        const testimonials = document.querySelectorAll('.testimonial');
+        const dots = document.querySelectorAll('.slider-dot');
+        
+        function showTestimonial(index) {
+            testimonials.forEach((testimonial, i) => {
+                testimonial.style.transform = `translateX(${100 * (i - index)}%)`;
+            });
+            
+            // Update dots
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[index].classList.add('active');
+            
+            currentTestimonial = index;
+        }
+        
+        function nextTestimonial() {
+            const nextIndex = (currentTestimonial + 1) % testimonials.length;
+            showTestimonial(nextIndex);
+        }
+        
+        // Dot navigation
+        dots.forEach(dot => {
+            dot.addEventListener('click', () => {
+                const index = parseInt(dot.getAttribute('data-index'));
+                showTestimonial(index);
+            });
+        });
+        
+        // Auto-rotate testimonials
+        let sliderInterval = setInterval(nextTestimonial, 7000);
+        
+        // Pause on hover
+        const slider = document.getElementById('testimonial-slider');
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(sliderInterval);
+        });
+        
+        slider.addEventListener('mouseleave', () => {
+            sliderInterval = setInterval(nextTestimonial, 7000);
+        });
+        
+        // Initial display
+        showTestimonial(currentTestimonial);
+        
+        // === ACCORDION ===
+        const accordionItems = document.querySelectorAll('.accordion-item');
+        
+        accordionItems.forEach(item => {
+            const header = item.querySelector('.accordion-header');
+            
+            header.addEventListener('click', () => {
+                const currentlyActive = document.querySelector('.accordion-item.active');
+                
+                // Close other items
+                if (currentlyActive && currentlyActive !== item) {
+                    currentlyActive.classList.remove('active');
+                    currentlyActive.querySelector('.accordion-content').style.maxHeight = '0';
+                }
+                
+                // Toggle current item
+                item.classList.toggle('active');
+                const content = item.querySelector('.accordion-content');
+                
+                if (item.classList.contains('active')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                } else {
+                    content.style.maxHeight = '0';
+                }
+            });
+        });
+        
+        // === SPOOKY EFFECTS ===
+        // Random ghost emojis floating around
+        const ghostEmojis = ['👻', '💀', '🦴', '👽', '🧟', '🧛', '🧙', '⚰️', '🕷️', '🕸️', '🔮', '☠️'];
+        const body = document.body;
+        
+        function createFloatingGhost() {
+            const ghost = document.createElement('div');
+            ghost.textContent = ghostEmojis[Math.floor(Math.random() * ghostEmojis.length)];
+            ghost.style.position = 'fixed';
+            ghost.style.left = `${Math.random() * 100}vw`;
+            ghost.style.top = `${Math.random() * 100}vh`;
+            ghost.style.fontSize = `${Math.random() * 3 + 1}rem`;
+            ghost.style.opacity = '0.7';
+            ghost.style.zIndex = '1';
+            ghost.style.pointerEvents = 'none';
+            ghost.style.animation = `float ${Math.random() * 10 + 5}s infinite ease-in-out`;
+            ghost.style.animationDelay = `${Math.random() * 5}s`;
+            ghost.style.filter = `drop-shadow(0 0 10px ${getRandomColor()})`;
+            ghost.style.cursor = 'pointer';
+            body.appendChild(ghost);
+            
+            // Make ghost clickable
+            ghost.addEventListener('click', () => {
+                ghost.style.animation = 'none';
+                ghost.style.transform = 'scale(1.5)';
+                ghost.style.opacity = '0';
+                ghost.style.transition = 'all 0.5s';
+                
+                setTimeout(() => {
+                    ghost.remove();
+                }, 500);
+            });
+            
+            // Remove ghost after animation completes to prevent DOM clutter
+            setTimeout(() => {
+                ghost.remove();
+            }, (Math.random() * 10 + 5) * 1000);
+        }
+        
+        function getRandomColor() {
+            const colors = ['var(--ectoplasm-green)', 'var(--blood-red)', 'var(--spooky-purple)', 'var(--ghost-white)'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+        
+        // Create initial ghosts
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createFloatingGhost, i * 500);
+        }
+        
+        // Keep adding ghosts periodically
+        setInterval(createFloatingGhost, 3000);
+        
+        // === CURSOR TRAIL ===
+        document.addEventListener('mousemove', function(e) {
+            if (Math.random() > 0.7) { // Only create trails sometimes
+                const trail = document.createElement('div');
+                trail.className = 'cursor-trail';
+                trail.style.left = e.pageX + 'px';
+                trail.style.top = e.pageY + 'px';
+                trail.style.position = 'absolute';
+                trail.style.width = `${Math.random() * 15 + 5}px`;
+                trail.style.height = trail.style.width;
+                trail.style.backgroundColor = `rgba(124, 252, 0, ${Math.random() * 0.3 + 0.2})`;
+                trail.style.borderRadius = '50%';
+                trail.style.pointerEvents = 'none';
+                trail.style.zIndex = '9999';
+                trail.style.transform = 'translate(-50%, -50%)';
+                document.body.appendChild(trail);
+                
+                // Fade out and remove
+                setTimeout(() => {
+                    trail.style.opacity = '0';
+                    trail.style.transition = 'opacity 1s';
+                }, 100);
+                
+                setTimeout(() => {
+                    trail.remove();
+                }, 1100);
+            }
+        });
+        
+        // === RANDOM FLICKERING ===
+        function randomFlicker() {
+            if (Math.random() > 0.9) { // 10% chance of flicker
+                document.body.style.filter = 'brightness(0.8)';
+                setTimeout(() => {
+                    document.body.style.filter = 'brightness(1)';
+                }, 100);
+            }
+            setTimeout(randomFlicker, 5000);
+        }
+        
+        // Start flickering after page loads
+        window.addEventListener('load', () => {
+            setTimeout(randomFlicker, 10000);
+        });
+        
+        // === SCROLL REVEAL ANIMATION ===
+        const scrollElements = document.querySelectorAll('.feature-card, .pricing-card, .stat-item');
+        
+        function checkScroll() {
+            scrollElements.forEach(el => {
+                const elTop = el.getBoundingClientRect().top;
+                const isVisible = elTop < window.innerHeight * 0.9;
+                
+                if (isVisible) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        }
+        
+        // Set initial state
+        scrollElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+        });
+        
+               
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+        
+        // === DEMO ACCOUNT FUNCTIONALITY ===
+        // For demo purposes, let's add a way to quickly fill in demo credentials
+        document.addEventListener('keydown', (e) => {
+            // Press Ctrl+Alt+G to fill demo login
+            if (e.ctrlKey && e.altKey && e.key.toLowerCase() === 'g') {
+                if (loginModal.style.display === 'flex') {
+                    document.getElementById('login-email').value = 'ghost@example.com';
+                    document.getElementById('login-password').value = 'password';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

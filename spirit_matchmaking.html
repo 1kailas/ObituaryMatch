@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spirit Matchmaking | ObituaryMatch</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Eater&family=Creepster&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #8b0000;
+            --dark-blood: #5a0000;
+            --ghost-white: #f8f8ff;
+            --tombstone-gray: #2b2b2b;
+            --dark-tombstone: #1a1a1a;
+            --ectoplasm-green: #7cfc00;
+            --dark-ectoplasm: #5ac000;
+            --spooky-purple: #9400d3;
+            --coffin-brown: #654321;
+            --cobweb-gray: #e0e0e0;
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1518709766630-a6a7f45921c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--ghost-white);
+            min-height: 100vh;
+            font-family: 'IM Fell English SC', serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(43, 43, 43, 0.8) 100%);
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--tombstone-gray), var(--dark-tombstone));
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+            border-bottom: 1px solid var(--blood-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            grid-column: 1 / -1;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .logo h1 {
+            font-size: 1.5rem;
+            font-family: 'Eater', cursive;
+            text-shadow: 0 0 5px var(--ectoplasm-green);
+            margin: 0;
+        }
+        
+        .back-btn {
+            background: var(--blood-red);
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: 'Creepster', cursive;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+        
+        .back-btn:hover {
+            background: var(--dark-blood);
+        }
+        
+        /* Matchmaking Column */
+        .matchmaking-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .profile-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--spooky-purple);
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 0 20px rgba(148, 0, 211, 0.3);
+            position: relative;
+        }
+        
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--ectoplasm-green);
+            margin: 0 auto 1rem;
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.5);
+        }
+        
+        .profile-name {
+            font-size: 1.5rem;
+            margin: 0.5rem 0;
+            font-family: 'Creepster', cursive;
+            color: var(--ectoplasm-green);
+        }
+        
+        .profile-details {
+            margin: 0.5rem 0;
+            color: var(--cobweb-gray);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .profile-details span {
+            background: rgba(139, 0, 0, 0.3);
+            padding: 0.3rem 0.6rem;
+            border-radius: 15px;
+        }
+        
+        .profile-bio {
+            margin: 1rem 0;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        
+        .match-actions {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .action-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .dislike-btn {
+            background: var(--blood-red);
+            color: white;
+        }
+        
+        .dislike-btn:hover {
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.5);
+        }
+        
+        .like-btn {
+            background: var(--ectoplasm-green);
+            color: black;
+        }
+        
+        .like-btn:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 0 10px rgba(124, 252, 0, 0.5);
+        }
+        
+        /* Chat Column */
+        .chat-column {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .chat-container {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--blood-red);
+            border-radius: 15px;
+            padding: 1.5rem;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--spooky-purple);
+        }
+        
+        .chat-title {
+            font-family: 'Creepster', cursive;
+            color: var(--ectoplasm-green);
+            font-size: 1.3rem;
+        }
+        
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem 1rem;
+            border-radius: 15px;
+            position: relative;
+        }
+        
+        .received {
+            background: rgba(139, 0, 0, 0.3);
+            align-self: flex-start;
+            border-bottom-left-radius: 0;
+        }
+        
+        .sent {
+            background: rgba(124, 252, 0, 0.2);
+            align-self: flex-end;
+            border-bottom-right-radius: 0;
+        }
+        
+        .message-sender {
+            font-weight: bold;
+            font-size: 0.8rem;
+            margin-bottom: 0.3rem;
+            color: var(--ectoplasm-green);
+        }
+        
+        .chat-input-container {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+        
+        .chat-input {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+        }
+        
+        .chat-send {
+            padding: 0 1.5rem;
+            background: var(--ectoplasm-green);
+            color: black;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Creepster', cursive;
+            transition: all 0.3s;
+        }
+        
+        .chat-send:hover {
+            background: var(--dark-ectoplasm);
+        }
+        
+        /* Match Animation */
+        .match-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .match-text {
+            font-size: 2.5rem;
+            font-family: 'Eater', cursive;
+            color: var(--ectoplasm-green);
+            text-shadow: 0 0 10px var(--blood-red);
+            margin-bottom: 1.5rem;
+            animation: pulse 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        .matched-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--ectoplasm-green);
+            box-shadow: 0 0 20px rgba(124, 252, 0, 0.7);
+            margin-bottom: 1.5rem;
+        }
+        
+        .matched-name {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .match-btns {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Floating Ghosts */
+        .floating {
+            position: fixed;
+            font-size: 2rem;
+            z-index: 1;
+            animation: float 6s ease-in-out infinite;
+            filter: drop-shadow(0 0 5px var(--ectoplasm-green));
+            pointer-events: none;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        /* Loading indicator */
+        .typing-indicator {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--ectoplasm-green);
+            border-radius: 50%;
+            animation: typingAnimation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typingAnimation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .chat-container {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Ghost Elements -->
+    <div class="floating" style="top: 20%; left: 5%;">👻</div>
+    <div class="floating" style="top: 70%; right: 10%; animation-delay: 0.5s; filter: drop-shadow(0 0 5px var(--blood-red));">💀</div>
+    <div class="floating" style="bottom: 10%; left: 15%; animation-delay: 1s; filter: drop-shadow(0 0 5px var(--spooky-purple));">🦴</div>
+    
+    <header>
+        <div class="logo">
+            <span>⚰️</span>
+            <h1>ObituaryMatch</h1>
+        </div>
+        <a href="index.html" class="back-btn">Back</a>
+    </header>
+    
+    <div class="container">
+        <!-- Matchmaking Column -->
+        <div class="matchmaking-column">
+            <h2 style="font-size: 1.8rem; font-family: 'Eater', cursive; margin: 1rem 0;">Find Your Eternal Match</h2>
+            <p style="font-size: 1rem; margin-bottom: 1rem;">Swipe through spirits to find your perfect afterlife partner</p>
+            
+            <div class="profile-card" id="spirit-profile">
+                <img src="https://i.imgur.com/ghost1.jpg" alt="Spirit" class="profile-avatar" id="profile-avatar">
+                <h3 class="profile-name" id="profile-name">Lady Eleanor</h3>
+                <div class="profile-details" id="profile-details">
+                    <span>Victorian Era</span>
+                    <span>Poltergeist</span>
+                    <span>Died: 1792</span>
+                </div>
+                <div class="profile-bio" id="profile-bio">
+                    Former aristocrat who enjoys haunting grand estates. Looking for a refined spirit to share eternity with in luxurious haunted mansions.
+                </div>
+                
+                <div class="match-actions">
+                    <button class="action-btn dislike-btn" id="dislike-btn">👎</button>
+                    <button class="action-btn like-btn" id="like-btn">💖</button>
+                </div>
+            </div>
+            
+            <!-- Match Animation -->
+            <div class="match-animation" id="match-animation">
+                <div class="match-text">IT'S A MATCH!</div>
+                <img src="" alt="Matched Spirit" class="matched-avatar" id="matched-avatar">
+                <div class="matched-name" id="matched-name">You matched with Lady Eleanor</div>
+                <div class="match-btns">
+                    <button class="back-btn" id="keep-swiping">Keep Swiping</button>
+                    <button class="action-btn like-btn" id="start-chat">Chat Now</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chat Column -->
+        <div class="chat-column">
+            <h2 style="font-size: 1.8rem; font-family: 'Eater', cursive; margin: 1rem 0;">Spirit Communications</h2>
+            <p style="font-size: 1rem; margin-bottom: 1rem;">Connect with your matched spirits from beyond the grave</p>
+            
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="chat-title" id="current-chat-title">Select a spirit to chat</div>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will appear here -->
+                    <div class="message-info">Match with a spirit to start chatting</div>
+                </div>
+                
+                <div class="chat-input-container">
+                    <input type="text" class="chat-input" id="chat-input" placeholder="Type your message..." disabled>
+                    <button class="chat-send" id="chat-send" disabled>Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Spirit data
+        const spirits = [
+            {
+                id: 1,
+                name: "Lady Eleanor",
+                avatar: "https://i.imgur.com/ghost1.jpg",
+                era: "Victorian",
+                hauntingStyle: "Poltergeist",
+                deathYear: 1792,
+                bio: "Former aristocrat who enjoys haunting grand estates. Looking for a refined spirit to share eternity with in luxurious haunted mansions.",
+                personality: "Elegant, refined, enjoys classical music and fine art. Speaks in a sophisticated manner with old-world charm.",
+                messages: [
+                    { text: "*ethereal moaning* Greetings, spectral friend...", sent: false },
+                    { text: "Do you also enjoy rearranging silverware in the dead of night?", sent: false }
+                ]
+            },
+            {
+                id: 2,
+                name: "The Captain",
+                avatar: "https://i.imgur.com/ghost2.jpg",
+                era: "Industrial",
+                hauntingStyle: "Apparition",
+                deathYear: 1854,
+                bio: "Sea captain who still watches over his ship. Seeks a loyal spirit to haunt the high seas together.",
+                personality: "Bold, adventurous, loves the sea. Speaks in nautical terms with a deep, booming voice.",
+                messages: [
+                    { text: "Ahoy there, matey! *creaking ship sounds*", sent: false },
+                    { text: "The ghostly winds be favorable tonight!", sent: false }
+                ]
+            },
+            {
+                id: 3,
+                name: "Madame Zora",
+                avatar: "https://i.imgur.com/ghost3.jpg",
+                era: "Roaring 20s",
+                hauntingStyle: "Seer",
+                deathYear: 1923,
+                bio: "Fortune teller who can still predict the future. Looking for a curious spirit to share visions with.",
+                personality: "Mysterious, cryptic, enjoys making predictions. Speaks in riddles and vague prophecies.",
+                messages: [
+                    { text: "I see you in my crystal ball... *mysterious glow*", sent: false },
+                    { text: "The spirits tell me we have much to discuss!", sent: false }
+                ]
+            }
+        ];
+        
+        // App state
+        let currentSpiritIndex = 0;
+        let matchedSpirits = [];
+        let currentChatSpirit = null;
+        let isWaitingForResponse = false;
+        
+        // DOM elements
+        const profileAvatar = document.getElementById('profile-avatar');
+        const profileName = document.getElementById('profile-name');
+        const profileDetails = document.getElementById('profile-details');
+        const profileBio = document.getElementById('profile-bio');
+        const dislikeBtn = document.getElementById('dislike-btn');
+        const likeBtn = document.getElementById('like-btn');
+        const matchAnimation = document.getElementById('match-animation');
+        const matchedAvatar = document.getElementById('matched-avatar');
+        const matchedName = document.getElementById('matched-name');
+        const keepSwipingBtn = document.getElementById('keep-swiping');
+        const startChatBtn = document.getElementById('start-chat');
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const chatTitle = document.getElementById('current-chat-title');
+        
+        // Load current spirit
+        function loadSpirit() {
+            const spirit = spirits[currentSpiritIndex];
+            profileAvatar.src = spirit.avatar;
+            profileName.textContent = spirit.name;
+            
+            // Create details with era, haunting style, and death year
+            profileDetails.innerHTML = `
+                <span>${spirit.era} Era</span>
+                <span>${spirit.hauntingStyle}</span>
+                <span>Died: ${spirit.deathYear}</span>
+            `;
+            
+            profileBio.textContent = spirit.bio;
+        }
+        
+        // Show next spirit
+        function nextSpirit() {
+            currentSpiritIndex = (currentSpiritIndex + 1) % spirits.length;
+            loadSpirit();
+        }
+        
+        // Show match animation
+        function showMatch(spirit) {
+            matchedAvatar.src = spirit.avatar;
+            matchedName.textContent = `You matched with ${spirit.name}`;
+            matchAnimation.style.display = 'flex';
+        }
+        
+        // Load chat with a spirit
+        function loadChat(spirit) {
+            currentChatSpirit = spirit;
+            chatTitle.textContent = `Chat with ${spirit.name}`;
+            chatMessages.innerHTML = '';
+            
+            // Enable chat input
+            chatInput.disabled = false;
+            chatSend.disabled = false;
+            chatInput.placeholder = "Channel your message...";
+            
+            // Load existing messages
+            spirit.messages.forEach(msg => {
+                addMessage(msg.text, msg.sent);
+            });
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Add message to chat
+        function addMessage(text, isSent) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isSent ? 'sent' : 'received'}`;
+            
+            if (!isSent) {
+                const senderDiv = document.createElement('div');
+                senderDiv.className = 'message-sender';
+                senderDiv.textContent = currentChatSpirit.name;
+                messageDiv.appendChild(senderDiv);
+            }
+            
+            const textDiv = document.createElement('div');
+            textDiv.textContent = text;
+            messageDiv.appendChild(textDiv);
+            
+            chatMessages.appendChild(messageDiv);
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+        
+        // Show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'message received';
+            
+            const senderDiv = document.createElement('div');
+            senderDiv.className = 'message-sender';
+            senderDiv.textContent = currentChatSpirit.name;
+            typingDiv.appendChild(senderDiv);
+            
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            `;
+            
+            typingDiv.appendChild(typingIndicator);
+            chatMessages.appendChild(typingDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            
+            return typingDiv;
+        }
+        
+        // Remove typing indicator
+        function removeTypingIndicator(typingElement) {
+            if (typingElement && typingElement.parentNode) {
+                typingElement.parentNode.removeChild(typingElement);
+            }
+        }
+        
+        // Generate response using Groq API
+        async function generateSpiritResponse(userMessage) {
+            if (!currentChatSpirit || isWaitingForResponse) return;
+            
+            isWaitingForResponse = true;
+            const typingElement = showTypingIndicator();
+            
+            try {
+                // Prepare the prompt for the AI
+                const prompt = `You are ${currentChatSpirit.name}, a ${currentChatSpirit.hauntingStyle} from the ${currentChatSpirit.era} era who died in ${currentChatSpirit.deathYear}. 
+                Your personality: ${currentChatSpirit.personality}
+                You're chatting with someone on a ghost dating app. Keep your response to 1-2 sentences max, and stay in character.
+                
+                The user said: "${userMessage}"
+                
+                Respond as ${currentChatSpirit.name}:`;
+                
+                // Call Groq API (you would replace this with actual API call)
+                // For demo purposes, we'll simulate an API response
+                //console.log("Calling Groq API with prompt:", prompt);
+                
+                // Simulate API delay
+                await new Promise(resolve => setTimeout(resolve, 1500));
+                
+                // In a real implementation, you would make an actual API call here:
+                /*
+                const response = await fetch('https://api.groq.com/v1/chat/completions', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer YOUR_GROQ_API_KEY'
+                    },
+                    body: JSON.stringify({
+                        model: "mixtral-8x7b-32768",
+                        messages: [
+                            {
+                                role: "system",
+                                content: `You are ${currentChatSpirit.name}, a ${currentChatSpirit.hauntingStyle} from the ${currentChatSpirit.era} era. ${currentChatSpirit.personality}`
+                            },
+                            {
+                                role: "user",
+                                content: userMessage
+                            }
+                        ],
+                        max_tokens: 100,
+                        temperature: 0.7
+                    })
+                });
+                
+                const data = await response.json();
+                const aiResponse = data.choices[0].message.content;
+                */
+                
+                // Simulated responses based on spirit personality
+                let aiResponse = "";
+                const randomChoice = Math.floor(Math.random() * 3);
+                
+                switch(currentChatSpirit.id) {
+                    case 1: // Lady Eleanor
+                        const eleanorResponses = [
+                            "How dreadfully charming of you to mention that, my spectral companion.",
+                            "In my time, we would have considered that quite the scandalous remark!",
+                            "Your words dance through the ether like a waltz at a grand ball."
+                        ];
+                        aiResponse = eleanorResponses[randomChoice];
+                        break;
+                    case 2: // The Captain
+                        const captainResponses = [
+                            "Arrr, that be a fine observation, ye ghostly matey!",
+                            "By Davy Jones' locker, that reminds me of a tale from the high seas!",
+                            "Aye, the spirits be whispering similar thoughts in the rigging tonight."
+                        ];
+                        aiResponse = captainResponses[randomChoice];
+                        break;
+                    case 3: // Madame Zora
+                        const zoraResponses = [
+                            "The spirits show me that your words carry hidden meaning...",
+                            "Ah, just as the tarot cards foretold this conversation!",
+                            "I sense a powerful aura around your message, my spectral friend."
+                        ];
+                        aiResponse = zoraResponses[randomChoice];
+                        break;
+                    default:
+                        aiResponse = "How fascinating, my ephemeral acquaintance...";
+                }
+                
+                // Remove typing indicator and add the actual response
+                removeTypingIndicator(typingElement);
+                addMessage(aiResponse, false);
+                currentChatSpirit.messages.push({ text: aiResponse, sent: false });
+                
+            } catch (error) {
+                console.error("Error generating response:", error);
+                removeTypingIndicator(typingElement);
+                addMessage("*ethereal static* My connection to the spirit world is weak...", false);
+                currentChatSpirit.messages.push({ text: "*ethereal static* My connection to the spirit world is weak...", sent: false });
+            } finally {
+                isWaitingForResponse = false;
+            }
+        }
+        
+        // Send message handler
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (message && currentChatSpirit && !isWaitingForResponse) {
+                // Add user message
+                addMessage(message, true);
+                currentChatSpirit.messages.push({ text: message, sent: true });
+                chatInput.value = '';
+                
+                // Generate and add AI response
+                await generateSpiritResponse(message);
+            }
+        }
+        
+        // Event listeners
+        dislikeBtn.addEventListener('click', () => {
+            nextSpirit();
+        });
+        
+        likeBtn.addEventListener('click', () => {
+            const spirit = spirits[currentSpiritIndex];
+            // 40% chance of match
+            if (Math.random() < 0.4 && !matchedSpirits.includes(spirit.id)) {
+                matchedSpirits.push(spirit.id);
+                showMatch(spirit);
+            } else {
+                nextSpirit();
+            }
+        });
+        
+        keepSwipingBtn.addEventListener('click', () => {
+            matchAnimation.style.display = 'none';
+            nextSpirit();
+        });
+        
+        startChatBtn.addEventListener('click', () => {
+            matchAnimation.style.display = 'none';
+            loadChat(spirits[currentSpiritIndex]);
+        });
+        
+        chatSend.addEventListener('click', () => {
+            sendMessage();
+        });
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+        
+        // Initialize
+        loadSpirit();
+    </script>
+</body>
+</html>

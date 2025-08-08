@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ObituaryMatch | Eternal Connections</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Eater&family=Creepster&family=IM+Fell+English+SC&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --blood-red: #8b0000;
+            --dark-blood: #5a0000;
+            --ghost-white: #f8f8ff;
+            --tombstone-gray: #2b2b2b;
+            --dark-tombstone: #1a1a1a;
+            --ectoplasm-green: #7cfc00;
+            --dark-ectoplasm: #5ac000;
+            --spooky-purple: #9400d3;
+            --coffin-brown: #654321;
+            --cobweb-gray: #e0e0e0;
+            --gothic-gold: #d4af37;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80') no-repeat center center fixed;
+            background-size: cover;
+            color: var(--ghost-white);
+            min-height: 100vh;
+            font-family: 'IM Fell English SC', serif;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(43, 43, 43, 0.8) 100%);
+            z-index: -1;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(to right, var(--tombstone-gray), var(--dark-tombstone));
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
+            border-bottom: 1px solid var(--blood-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .logo h1 {
+            font-size: 2rem;
+            font-family: 'Eater', cursive;
+            text-shadow: 0 0 10px var(--ectoplasm-green);
+            animation: glow 2s infinite alternate;
+        }
+        
+        @keyframes glow {
+            from { text-shadow: 0 0 5px var(--ectoplasm-green); }
+            to { text-shadow: 0 0 15px var(--ectoplasm-green), 0 0 20px var(--spooky-purple); }
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--ghost-white);
+            text-decoration: none;
+            font-size: 1.1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: all 0.3s;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ectoplasm-green);
+            transition: width 0.3s;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        nav a:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .user-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--ectoplasm-green);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .user-avatar:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.5);
+        }
+        
+        .notification-bell {
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .notification-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: var(--blood-red);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-family: Arial, sans-serif;
+        }
+        
+        /* Main Layout */
+        .main-container {
+            display: flex;
+            flex: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 2rem;
+            gap: 2rem;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .sidebar-section {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--blood-red);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar-title {
+            font-family: 'Creepster', cursive;
+            color: var(--ectoplasm-green);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .sidebar-menu a {
+            color: var(--cobweb-gray);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+        
+        .sidebar-menu a:hover {
+            color: var(--ectoplasm-green);
+            transform: translateX(5px);
+        }
+        
+        .spirit-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .spirit-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--ectoplasm-green);
+            box-shadow: 0 0 15px rgba(124, 252, 0, 0.5);
+        }
+        
+        .spirit-info h3 {
+            font-family: 'Creepster', cursive;
+            margin-bottom: 0.3rem;
+        }
+        
+        .spirit-info p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .online-status {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.8rem;
+            color: var(--ectoplasm-green);
+        }
+        
+        .online-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--ectoplasm-green);
+            display: inline-block;
+        }
+        
+        /* Main Content */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        
+        /* Post Creator */
+        .post-creator {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--blood-red);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .post-input {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--blood-red);
+            border-radius: 8px;
+            padding: 1rem;
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            resize: none;
+            height: 100px;
+        }
+        
+        .post-input::placeholder {
+            color: #666;
+        }
+        
+        .post-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .post-options {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .post-option {
+            background: none;
+            border: none;
+            color: var(--cobweb-gray);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s;
+        }
+        
+        .post-option:hover {
+            color: var(--ectoplasm-green);
+            transform: scale(1.1);
+        }
+        
+        .post-submit {
+            background: var(--ectoplasm-green);
+            color: black;
+            border: none;
+            border-radius: 5px;
+            padding: 0.5rem 1.5rem;
+            font-family: 'Creepster', cursive;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .post-submit:hover {
+            background: var(--dark-ectoplasm);
+            transform: translateY(-2px);
+        }
+        
+        /* Posts Feed */
+        .post {
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--blood-red);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .post-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--ectoplasm-green);
+        }
+        
+        .post-author {
+            flex: 1;
+        }
+        
+        .post-author h4 {
+            font-family: 'Creepster', cursive;
+            margin-bottom: 0.2rem;
+        }
+        
+        .post-author p {
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        .post-meta {
+            color: #666;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .post-content {
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .post-image {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--blood-red);
+        }
+        
+        .post-actions-bar {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(139, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(139, 0, 0, 0.3);
+            padding: 0.8rem 0;
+            margin-bottom: 1rem;
+        }
+        
+        .post-action {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--cobweb-gray);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .post-action:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .post-comments {
+            margin-top: 1.5rem;
+        }
+        
+        .comment {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .comment-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 1px solid var(--ectoplasm-green);
+        }
+        
+        .comment-content {
+            flex: 1;
+        }
+        
+        .comment-author {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+            color: var(--ectoplasm-green);
+        }
+        
+        .comment-text {
+            background: rgba(43, 43, 43, 0.5);
+            padding: 0.8rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .comment-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .comment-action {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .comment-action:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .add-comment {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .comment-input {
+            flex: 1;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--blood-red);
+            border-radius: 20px;
+            padding: 0.8rem 1rem;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        
+        .comment-submit {
+            background: none;
+            border: none;
+            color: var(--ectoplasm-green);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        /* Right Sidebar */
+        .right-sidebar {
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        /* Events */
+        .event {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        
+        .event-date {
+            background: var(--blood-red);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Creepster', cursive;
+        }
+        
+        .event-day {
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+        
+        .event-month {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+        }
+        
+        .event-details h4 {
+            font-family: 'Creepster', cursive;
+            margin-bottom: 0.3rem;
+        }
+        
+        .event-details p {
+            color: #aaa;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .event-rsvp {
+            color: var(--ectoplasm-green);
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+        
+        /* Spirit Suggestions */
+        .suggested-spirit {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .suggested-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--ectoplasm-green);
+        }
+        
+        .suggested-info {
+            flex: 1;
+        }
+        
+        .suggested-info h4 {
+            font-family: 'Creepster', cursive;
+            margin-bottom: 0.2rem;
+        }
+        
+        .suggested-info p {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+        
+        .follow-btn {
+            background: none;
+            border: 1px solid var(--ectoplasm-green);
+            color: var(--ectoplasm-green);
+            border-radius: 5px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .follow-btn:hover {
+            background: rgba(124, 252, 0, 0.1);
+        }
+        
+        /* Trending Haunts */
+        .trending-haunt {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .haunt-image {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--blood-red);
+        }
+        
+        .haunt-details h4 {
+            font-family: 'Creepster', cursive;
+            margin-bottom: 0.3rem;
+        }
+        
+        .haunt-details p {
+            color: #aaa;
+            font-size: 0.8rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark-tombstone);
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid var(--blood-red);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--ectoplasm-green);
+        }
+        
+        .copyright {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            
+            nav ul {
+                gap: 1rem;
+            }
+            
+            .post-creator, .post {
+                padding: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .user-controls {
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Ghost Elements -->
+    <div class="floating" style="position: fixed; top: 20%; left: 5%; font-size: 3rem; z-index: 1; filter: drop-shadow(0 0 10px var(--ectoplasm-green));">👻</div>
+    <div class="floating" style="position: fixed; top: 70%; right: 10%; font-size: 4rem; z-index: 1; animation-delay: 0.5s; filter: drop-shadow(0 0 10px var(--blood-red));">💀</div>
+    
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <span style="font-size: 2.5rem;">⚰️</span>
+            <h1>ObituaryMatch</h1>
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="#" class="active">Eternal Feed</a></li>
+                <li><a href="#">Séance Chat</a></li>
+                <li><a href="#">Haunt Map</a></li>
+                <li><a href="#">Spirit Dating</a></li>
+                <li><a href="#">Obituaries</a></li>
+            </ul>
+        </nav>
+        
+        <div class="user-controls">
+            <div class="notification-bell">
+                🔔
+                <div class="notification-count">13</div>
+            </div>
+            <img src="https://i.imgur.com/ghost1.jpg" alt="User Avatar" class="user-avatar">
+        </div>
+    </header>
+    
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="spirit-status">
+                    <img src="https://i.imgur.com/ghost1.jpg" alt="Spirit Avatar" class="spirit-avatar">
+                    <div class="spirit-info">
+                        <h3>Lady Eleanor</h3>
+                        <p>Victorian Era Ghost</p>
+                        <div class="online-status">Online</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">🕯️ Quick Links</h2>
+                <ul class="sidebar-menu">
+                    <li><a href="#">News Feed</a></li>
+                    <li><a href="#">Messages</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Memorials</a></li>
+                    <li><a href="#">Groups</a></li>
+                    <li><a href="#">Marketplace</a></li>
+                    <li><a href="#">Cemetery Check-ins</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">👻 Shortcuts</h2>
+                <ul class="sidebar-menu">
+                    <li><a href="#">Poltergeist Support</a></li>
+                    <li><a href="#">Medium Directory</a></li>
+                    <li><a href="#">Death Anniversary</a></li>
+                    <li><a href="#">Haunt Together</a></li>
+                    <li><a href="#">Spectral Dating</a></li>
+                    <li><a href="#">Ghost Stories</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">⚰️ Recently Deceased</h2>
+                <div class="suggested-spirit">
+                    <img src="https://i.imgur.com/ghost2.jpg" alt="Spirit" class="suggested-avatar">
+                    <div class="suggested-info">
+                        <h4>The Captain</h4>
+                        <p>Died: 1854</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                <div class="suggested-spirit">
+                    <img src="https://i.imgur.com/ghost3.jpg" alt="Spirit" class="suggested-avatar">
+                    <div class="suggested-info">
+                        <h4>Madame Zora</h4>
+                        <p>Died: 1923</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+            </div>
+        </aside>
+        
+        <!-- Main Feed -->
+        <main class="content">
+            <!-- Post Creator -->
+            <div class="post-creator">
+                <textarea class="post-input" placeholder="Share your ghostly thoughts..."></textarea>
+                <div class="post-actions">
+                    <div class="post-options">
+                        <button class="post-option">📷 Photo</button>
+                        <button class="post-option">🎥 Video</button>
+                        <button class="post-option">📍 Location</button>
+                        <button class="post-option">🔮 Séance</button>
+                    </div>
+                    <button class="post-submit">Post</button>
+                </div>
+            </div>
+            
+            <!-- Post 1 -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://i.imgur.com/ghost2.jpg" alt="Author" class="post-avatar">
+                    <div class="post-author">
+                        <h4>The Captain</h4>
+                        <p>Industrial Era Ghost</p>
+                    </div>
+                    <div class="post-meta">
+                        ⚓ 3h ago
+                    </div>
+                </div>
+                
+                <div class="post-content">
+                    <p>Arrr mateys! Just found me old shipwreck off the coast of Bermuda. Any spirits want to join me for a haunting voyage? We'll scare the barnacles off any living sailors who dare come near!</p>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1518709766630-a6a7f45921c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80" alt="Haunted Ship" class="post-image">
+                
+                <div class="post-actions-bar">
+                    <button class="post-action">👍 42</button>
+                    <button class="post-action">💬 13</button>
+                    <button class="post-action">👻 Share</button>
+                    <button class="post-action">🕯️ Light Candle</button>
+                </div>
+                
+                <div class="post-comments">
+                    <div class="comment">
+                        <img src="https://i.imgur.com/ghost3.jpg" alt="Commenter" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">Madame Zora</div>
+                            <div class="comment-text">The spirits tell me this voyage will be most eventful! I foresee much screaming from the living.</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                                <span class="comment-action">1h</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                        <img src="https://i.imgur.com/ghost1.jpg" alt="User" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <button class="comment-submit">🕯️</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 2 -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://i.imgur.com/ghost3.jpg" alt="Author" class="post-avatar">
+                    <div class="post-author">
+                        <h4>Madame Zora</h4>
+                        <p>Roaring 20s Seer</p>
+                    </div>
+                    <div class="post-meta">
+                        🔮 5h ago
+                    </div>
+                </div>
+                
+                <div class="post-content">
+                    <p>The spirits have shown me a vision... there will be a full moon this Friday night! Perfect for our monthly séance circle. Who's joining?</p>
+                </div>
+                
+                <div class="post-actions-bar">
+                    <button class="post-action">👍 87</button>
+                    <button class="post-action">💬 24</button>
+                    <button class="post-action">👻 Share</button>
+                    <button class="post-action">🕯️ Light Candle</button>
+                </div>
+                
+                <div class="post-comments">
+                    <div class="comment">
+                        <img src="https://i.imgur.com/ghost1.jpg" alt="Commenter" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">Lady Eleanor</div>
+                            <div class="comment-text">I shall attend, darling. My castle has excellent séance acoustics.</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                                <span class="comment-action">4h</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="comment">
+                        <img src="https://i.imgur.com/ghost2.jpg" alt="Commenter" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">The Captain</div>
+                            <div class="comment-text">Arrr, I'll try to make port in time for the gathering!</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                                <span class="comment-action">3h</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                        <img src="https://i.imgur.com/ghost1.jpg" alt="User" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <button class="comment-submit">🕯️</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Post 3 -->
+            <div class="post">
+                <div class="post-header">
+                    <img src="https://i.imgur.com/ghost1.jpg" alt="Author" class="post-avatar">
+                    <div class="post-author">
+                        <h4>Lady Eleanor</h4>
+                        <p>Victorian Aristocrat</p>
+                    </div>
+                    <div class="post-meta">
+                        👑 1d ago
+                    </div>
+                </div>
+                
+                <div class="post-content">
+                    <p>My dear spectral friends, I'm hosting a haunting soiree at Blackwood Manor this weekend. Formal attire required (transparent is acceptable, of course). We'll have ectoplasm cocktails and a waltz competition!</p>
+                </div>
+                
+                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80" alt="Haunted Manor" class="post-image">
+                
+                <div class="post-actions-bar">
+                    <button class="post-action">👍 132</button>
+                    <button class="post-action">💬 47</button>
+                    <button class="post-action">👻 Share</button>
+                    <button class="post-action">🕯️ Light Candle</button>
+                </div>
+                
+                <div class="post-comments">
+                    <div class="add-comment">
+                        <img src="https://i.imgur.com/ghost1.jpg" alt="User" class="comment-avatar">
+                        <input type="text" class="comment-input" placeholder="Write a comment...">
+                        <button class="comment-submit">🕯️</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">📅 Upcoming Events</h2>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <div class="event-day">13</div>
+                        <div class="event-month">Oct</div>
+                    </div>
+                    <div class="event-details">
+                        <h4>Annual Ghost Ball</h4>
+                        <p>Haunted Castle, Transylvania</p>
+                        <div class="event-rsvp">RSVP</div>
+                    </div>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <div class="event-day">31</div>
+                        <div class="event-month">Oct</div>
+                    </div>
+                    <div class="event-details">
+                        <h4>Halloween Haunt-a-thon</h4>
+                        <p>Global Haunting</p>
+                        <div class="event-rsvp">RSVP</div>
+                    </div>
+                </div>
+                
+                <div class="event">
+                    <div class="event-date">
+                        <div class="event-day">2</div>
+                        <div class="event-month">Nov</div>
+                    </div>
+                    <div class="event-details">
+                        <h4>Day of the Dead Celebration</h4>
+                        <p>Mexico City Catacombs</p>
+                        <div class="event-rsvp">RSVP</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">🔥 Trending Haunts</h2>
+                
+                <div class="trending-haunt">
+                    <img src="https://images.unsplash.com/photo-1506815444479-bfdb1e96c566?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80" alt="Haunt" class="haunt-image">
+                    <div class="haunt-details">
+                        <h4>Winchester Mansion</h4>
+                        <p>327 spirits active</p>
+                    </div>
+                </div>
+                
+                <div class="trending-haunt">
+                    <img src="https://images.unsplash.com/photo-1518709766630-a6a7f45921c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80" alt="Haunt" class="haunt-image">
+                    <div class="haunt-details">
+                        <h4>RMS Queen Mary</h4>
+                        <p>42 sailors active</p>
+                    </div>
+                </div>
+                
+                <div class="trending-haunt">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2048&q=80" alt="Haunt" class="haunt-image">
+                    <div class="haunt-details">
+                        <h4>Poveglia Island</h4>
+                        <p>10,000+ spirits active</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar-section">
+                <h2 class="sidebar-title">👥 Spirit Suggestions</h2>
+                
+                <div class="suggested-spirit">
+                    <img src="https://i.imgur.com/ghost4.jpg" alt="Spirit" class="suggested-avatar">
+                    <div class="suggested-info">
+                        <h4>Phantom of the Opera</h4>
+                        <p>Died: 1870</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                
+                <div class="suggested-spirit">
+                    <img src="https://i.imgur.com/ghost5.jpg" alt="Spirit" class="suggested-avatar">
+                    <div class="suggested-info">
+                        <h4>Headless Horseman</h4>
+                        <p>Died: 1790</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+                
+                <div class="suggested-spirit">
+                    <img src="https://i.imgur.com/ghost6.jpg" alt="Spirit" class="suggested-avatar">
+                    <div class="suggested-info">
+                        <h4>Bloody Mary</h4>
+                        <p>Died: 1558</p>
+                    </div>
+                    <button class="follow-btn">Follow</button>
+                </div>
+            </div>
+        </aside>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">About</a>
+            <a href="#">Privacy Poltergeist</a>
+            <a href="#">Terms of Death</a>
+            <a href="#">Help Center</a>
+            <a href="#">Medium Directory</a>
+            <a href="#">Contact</a>
+        </div>
+        <div class="copyright">
+            © 2023 ObituaryMatch - Love Never Dies... But You Do!
+        </div>
+    </footer>
+
+    <script>
+        // === PROFILE LOADING ===
+        function loadSpiritProfile() {
+            const spiritProfile = JSON.parse(localStorage.getItem('spiritProfile'));
+            if (!spiritProfile) return;
+
+            // Sidebar & header avatars
+            document.querySelectorAll('.user-avatar, .spirit-avatar').forEach(el => {
+                el.src = spiritProfile.avatar;
+            });
+
+            // Sidebar & header names
+            document.querySelectorAll('.spirit-info h3').forEach(el => {
+                el.textContent = spiritProfile.name;
+            });
+
+            // Update static posts/comments authored by this user
+            document.querySelectorAll('.post').forEach(post => {
+                const authorName = post.querySelector('.post-author h4');
+                const authorAvatar = post.querySelector('.post-avatar');
+                if (authorName && authorAvatar && authorName.textContent.trim() === 'Lady Eleanor') {
+                    authorName.textContent = spiritProfile.name;
+                    authorAvatar.src = spiritProfile.avatar;
+                }
+                // Comments by this user
+                post.querySelectorAll('.comment').forEach(comment => {
+                    const commentName = comment.querySelector('.comment-author');
+                    const commentAvatar = comment.querySelector('.comment-avatar');
+                    if (commentName && commentAvatar && commentName.textContent.trim() === 'Lady Eleanor') {
+                        commentName.textContent = spiritProfile.name;
+                        commentAvatar.src = spiritProfile.avatar;
+                    }
+                });
+                // Add-comment avatar
+                post.querySelectorAll('.add-comment .comment-avatar').forEach(el => {
+                    el.src = spiritProfile.avatar;
+                });
+            });
+        }
+        loadSpiritProfile();
+
+        // === SCARING SCORE ===
+        function incrementScaringScore(amount = 1) {
+            let profile = JSON.parse(localStorage.getItem('spiritProfile'));
+            if (profile) {
+                profile.scaringScore = (profile.scaringScore || 0) + amount;
+                localStorage.setItem('spiritProfile', JSON.stringify(profile));
+                document.querySelectorAll('.scaring-score').forEach(el => {
+                    el.textContent = profile.scaringScore;
+                });
+            }
+        }
+
+        // === POST CREATOR ===
+        document.querySelector('.post-submit').addEventListener('click', function() {
+            const postInput = document.querySelector('.post-input');
+            const postText = postInput.value.trim();
+            if (postText) {
+                const contentSection = document.querySelector('.content');
+                const spiritProfile = JSON.parse(localStorage.getItem('spiritProfile')) || { name: "Anonymous", avatar: "https://i.imgur.com/ghost1.jpg" };
+                const newPost = document.createElement('div');
+                newPost.className = 'post';
+                newPost.innerHTML = `
+                    <div class="post-header">
+                        <img src="${spiritProfile.avatar}" alt="Author" class="post-avatar">
+                        <div class="post-author">
+                            <h4>${spiritProfile.name}</h4>
+                            <p>Victorian Aristocrat</p>
+                        </div>
+                        <div class="post-meta">
+                            👑 Just now
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        <p>${postText}</p>
+                    </div>
+                    <div class="post-actions-bar">
+                        <button class="post-action">👍 0</button>
+                        <button class="post-action">💬 0</button>
+                        <button class="post-action">👻 Share</button>
+                        <button class="post-action">🕯️ Light Candle</button>
+                    </div>
+                    <div class="post-comments">
+                        <div class="add-comment">
+                            <img src="${spiritProfile.avatar}" alt="User" class="comment-avatar">
+                            <input type="text" class="comment-input" placeholder="Write a comment...">
+                            <button class="comment-submit">🕯️</button>
+                        </div>
+                    </div>
+                `;
+                contentSection.insertBefore(newPost, contentSection.children[1]);
+                postInput.value = '';
+                addPostEventListeners(newPost);
+                incrementScaringScore(10);
+            }
+        });
+
+        // === COMMENT FUNCTIONALITY ===
+        document.querySelectorAll('.comment-submit').forEach(button => {
+            button.addEventListener('click', function() {
+                const commentInput = this.previousElementSibling;
+                const commentText = commentInput.value.trim();
+                if (commentText) {
+                    const commentSection = this.closest('.post-comments');
+                    const spiritProfile = JSON.parse(localStorage.getItem('spiritProfile')) || { name: "Anonymous", avatar: "https://i.imgur.com/ghost1.jpg" };
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = `
+                        <img src="${spiritProfile.avatar}" alt="User" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">${spiritProfile.name}</div>
+                            <div class="comment-text">${commentText}</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                                <span class="comment-action">Just now</span>
+                            </div>
+                        </div>
+                    `;
+                    commentSection.insertBefore(newComment, commentSection.lastElementChild);
+                    commentInput.value = '';
+                    const commentCount = this.closest('.post').querySelector('.post-action:nth-child(2)');
+                    const count = parseInt(commentCount.textContent.match(/\d+/)[0] || 0);
+                    commentCount.textContent = `💬 ${count + 1}`;
+                    incrementScaringScore(3);
+                }
+            });
+        });
+        document.querySelectorAll('.comment-input').forEach(input => {
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') this.nextElementSibling.click();
+            });
+        });
+
+        // === DYNAMIC POST EVENT LISTENERS ===
+        function addPostEventListeners(post) {
+            post.querySelector('.comment-submit').addEventListener('click', function() {
+                const commentInput = this.previousElementSibling;
+                const commentText = commentInput.value.trim();
+                const spiritProfile = JSON.parse(localStorage.getItem('spiritProfile')) || { name: "Anonymous", avatar: "https://i.imgur.com/ghost1.jpg" };
+                if (commentText) {
+                    const commentSection = this.closest('.post-comments');
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = `
+                        <img src="${spiritProfile.avatar}" alt="User" class="comment-avatar">
+                        <div class="comment-content">
+                            <div class="comment-author">${spiritProfile.name}</div>
+                            <div class="comment-text">${commentText}</div>
+                            <div class="comment-actions">
+                                <span class="comment-action">Like</span>
+                                <span class="comment-action">Reply</span>
+                                <span class="comment-action">Just now</span>
+                            </div>
+                        </div>
+                    `;
+                    commentSection.insertBefore(newComment, commentSection.lastElementChild);
+                    commentInput.value = '';
+                    const commentCount = post.querySelector('.post-action:nth-child(2)');
+                    const count = parseInt(commentCount.textContent.match(/\d+/)[0] || 0);
+                    commentCount.textContent = `💬 ${count + 1}`;
+                    incrementScaringScore(3);
+                }
+            });
+            post.querySelector('.comment-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') this.nextElementSibling.click();
+            });
+            post.querySelectorAll('.post-action').forEach(button => {
+                button.addEventListener('click', function() {
+                    if (this.textContent.includes('👍')) {
+                        const count = parseInt(this.textContent.match(/\d+/)[0] || 0);
+                        this.textContent = `👍 ${count + 1}`;
+                        incrementScaringScore(2);
+                    }
+                });
+            });
+        }
+
+        // === INITIALIZE SCARING SCORE DISPLAY ===
+        // Add this somewhere in your sidebar HTML:
+        // <div class="sidebar-section"><h2 class="sidebar-title">😱 Scaring Score</h2><div class="scaring-score">0</div></div>
+
+        // === OPTIONAL: Update all avatars/names on page load ===
+        window.addEventListener('DOMContentLoaded', loadSpiritProfile);
+    </script>
+</body>
+</html>
